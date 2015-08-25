@@ -18,7 +18,7 @@ fi
 
 # Update hostname if given
 if [ -f /mail_settings/myhostname ]; then
-	sed -i -e "s/myhostname = localhost/myhostname = $(sed 's:/:\\/:g' /mail_settings/myhostname)/" /etc/postfix/main.cf
+	sed -i -e "s/^myhostname = .*/myhostname = $(sed 's:/:\\/:g' /mail_settings/myhostname)/" /etc/postfix/main.cf
 	echo $(sed 's:/:\\/:g' /mail_settings/myhostname) > /etc/mailname
 fi
 
