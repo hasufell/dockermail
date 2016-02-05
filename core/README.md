@@ -44,7 +44,7 @@ Use the the example config files in `config/example` to get you started.
 
 5. Build container
 
-		docker build -t hasufell/gentoo-dockermail .
+		docker build -t mosaiksoftware/gentoo-dockermail .
 
 6. Run container
 
@@ -57,6 +57,6 @@ Use the the example config files in `config/example` to get you started.
 		  -v /var/lib/dockermail/settings:/mail_settings \
 		  -v /var/lib/dockermail/vmail:/vmail \
 		  -v <path-to-certs>:/etc/ssl/server
-		  dockermail_email_core
+		  mosaiksoftware/gentoo-dockermail
 
 	Note that the certificates must be named `email.crt` and `email.key`.
