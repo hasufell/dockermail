@@ -68,6 +68,9 @@ COPY ./config/supervisord.conf /etc/supervisord.conf
 
 ##############################
 
+# workaround for pbin bug
+# http://paludis.exherbo.org/trac/ticket/1341
+RUN chown -R postfix:postfix /var/lib/postfix
 
 # Nice place for your settings
 VOLUME ["/mail_settings"]
