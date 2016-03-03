@@ -1,11 +1,20 @@
 FROM        mosaiksoftware/gentoo-amd64-paludis:latest
 MAINTAINER  Julian Ospald "hasufell@posteo.de"
 
+
 ##### PACKAGE INSTALLATION #####
 
 # install nginx
-RUN chgrp paludisbuild /dev/tty && cave resolve -c docker-mail -x && \
-	rm -rf /usr/portage/distfiles/* /srv/binhost/*
+RUN chgrp paludisbuild /dev/tty && \
+	git -C /usr/portage checkout -- . && \
+	env-update && \
+	source /etc/profile && \
+	cave sync gentoo && \
+	cave resolve -c docker-mail -x --permit-old-version '*/*' \
+		--permit-downgrade '*/*' && \
+	cave fix-linkage -x && \
+	rm -rf /var/cache/paludis/names/* /var/cache/paludis/metadata/* \
+		/var/tmp/paludis/* /usr/portage/* /srv/binhost/*
 
 # update etc files... hope this doesn't screw up
 RUN etc-update --automode -5
